@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Family Graph</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <!-- vis-network library -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" rel="stylesheet"
+        type="text/css" />
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js"></script>
+    <!-- js-yaml library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Starry background -->
+    <div id="stars"></div>
+
+    <!-- Network Graph Container -->
+    <div id="graph-container"></div>
+
+    <!-- Left Panel: Title & Search -->
+    <div id="ui-panel" class="glass-panel">
+        <h1>Family Graph</h1>
+        <p class="subtitle">Interactive Universe of the Family</p>
+
+        <div class="layout-toggle">
+            <button id="btnGraph" class="toggle-btn active">Graph</button>
+            <button id="btnTree" class="toggle-btn">Tree</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search relatives..." autocomplete="off">
+            <div id="searchResults" class="hidden"></div>
+        </div>
+
+        <button id="addNodeBtn" class="primary-btn">
+            <span class="desktop-text">+ Add Relative</span>
+            <span class="mobile-icon" style="display:none">+</span>
+        </button>
+    </div>
+
+    <!-- Right Panel: Node Details -->
+    <div id="details-pane" class="glass-panel right-panel hidden">
+        <button id="closeDetails" class="close-btn">&times;</button>
+        <div id="nodeContent" class="content-scroll">
+            <div class="skeleton">Select a star to view details...</div>
+        </div>
+        <div class="actions">
+            <button id="editNodeBtn" class="secondary-btn">Edit & Download</button>
+        </div>
+    </div>
+
+    <!-- Legend -->
+    <div id="graph-legend" class="glass-panel">
+        <h3>Legend</h3>
+        <div class="legend-item">
+            <svg width="40" height="12">
+                <line x1="0" y1="6" x2="40" y2="6" stroke="#5e81ff" stroke-width="2" />
+                <polygon points="35,2 40,6 35,10" fill="#5e81ff" />
+            </svg>
+            <span>Parent → Child</span>
+        </div>
+        <div class="legend-item">
+            <svg width="40" height="12">
+                <line x1="0" y1="6" x2="40" y2="6" stroke="#ff6b9e" stroke-width="2" />
+            </svg>
+            <span>Married</span>
+        </div>
+        <div class="legend-item">
+            <svg width="40" height="12">
+                <line x1="0" y1="6" x2="40" y2="6" stroke="#a0a0a0" stroke-width="2" stroke-dasharray="5,3" />
+            </svg>
+            <span>Divorced</span>
+        </div>
+        <div class="legend-item">
+            <svg width="40" height="12">
+                <line x1="0" y1="6" x2="35" y2="6" stroke="#ff9f43" stroke-width="2" stroke-dasharray="5,3" />
+                <polygon points="35,2 40,6 35,10" fill="#ff9f43" />
+            </svg>
+            <span>Adopted</span>
+        </div>
+    </div>
+
+    <!-- Modal for Node Creation / Editing -->
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content glass-panel">
+            <h2 id="modalTitle">Create Relative's Profile</h2>
+            <form id="nodeForm">
+                <div class="form-group">
+                    <label>Unique ID (e.g. john-doe)<br>
+                        <input type="text" id="nodeId" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Full Name<br>
+                        <input type="text" id="nodeName" required>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Image Profile URL<br>
+                        <input type="text" id="nodeImage"
+                            placeholder="./data/image/face.jpg or https://image.com/pic.jpg">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Born Year or Date<br>
+                        <input type="text" id="nodeBorn" placeholder="1990 or 15/05/1990">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Died Year or Date (leave blank if alive)<br>
+                        <input type="text" id="nodeDied" placeholder="2050 or 20/12/2050">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Parents IDs (comma separated)<br>
+                        <input type="text" id="nodeParents" placeholder="father-id, mother-id">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Children IDs (comma separated)<br>
+                        <input type="text" id="nodeChildren" placeholder="child1-id, child2-id">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Adopted Children IDs (comma separated)<br>
+                        <input type="text" id="nodeAdopted" placeholder="adopted1-id">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Adopted By IDs (comma separated)<br>
+                        <input type="text" id="nodeAdoptedBy" placeholder="parent1-id">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Spouse IDs (comma separated, optionally add :YYYY)<br>
+                        <input type="text" id="nodeSpouses" placeholder="spouse1-id:1990">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Divorced IDs (comma separated, optionally add :YYYY)<br>
+                        <input type="text" id="nodeDivorced" placeholder="ex-spouse-id:2005">
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>Biography History (Markdown allowed)<br>
+                        <textarea id="nodeDescription" rows="4"></textarea>
+                    </label>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="secondary-btn" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="primary-btn" id="downloadMdBtn">Download .md File</button>
+                </div>
+                <div class="helper-text">
+                    Note: To apply changes to the live site, upload the downloaded .md file to your GitHub repository's
+                    /data folder, and update index.json.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Timeline Slider -->
+    <div id="timeline-container" class="glass-panel">
+        <button id="playTimelineBtn" class="btn primary">▶ Play</button>
+        <input type="range" id="timelineSlider" min="1500" max="2100" value="2026" step="1">
+        <span id="timelineYearDisplay" class="timeline-year">2026</span>
+    </div>
+
+    <!-- Logic -->
+    <script src="app.js"></script>
+</body>
+
+</html>

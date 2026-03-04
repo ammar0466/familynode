@@ -1,0 +1,550 @@
+:root {
+    --bg-color: #0b0f19;
+    --panel-bg: rgba(20, 25, 40, 0.6);
+    --panel-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #a0aab2;
+    --accent: #5e81ff;
+    --accent-hover: #7ea3ff;
+    --danger: #ff4d4d;
+    --font-fam: 'Outfit', sans-serif;
+}
+
+body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    font-family: var(--font-fam);
+    background: radial-gradient(circle at center, #1b2336 0%, var(--bg-color) 100%);
+    color: var(--text-primary);
+    overflow: hidden;
+}
+
+/* Background Stars */
+#stars {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 40px 70px, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 50px 160px, rgba(255, 255, 255, 0.7), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 90px 40px, rgba(255, 255, 255, 0.9), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 130px 80px, rgba(255, 255, 255, 0.6), rgba(0, 0, 0, 0)),
+        radial-gradient(1px 1px at 160px 120px, rgba(255, 255, 255, 0.5), rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    opacity: 0.4;
+    animation: drift 100s linear infinite;
+}
+
+@keyframes drift {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-200px);
+    }
+}
+
+#graph-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    /* Below panels */
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    padding: 24px;
+    z-index: 10;
+}
+
+/* UI Panel (Left) */
+#ui-panel {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    margin: 0;
+    font-weight: 600;
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: -10px 0 10px 0;
+}
+
+/* Search */
+.search-container {
+    position: relative;
+    width: 100%;
+}
+
+input[type="text"],
+input[type="url"],
+textarea {
+    width: 100%;
+    padding: 12px 14px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    color: white;
+    font-family: var(--font-fam);
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px rgba(94, 129, 255, 0.3);
+}
+
+#searchResults {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--panel-border);
+    border-radius: 8px;
+    margin-top: 5px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 20;
+}
+
+.search-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.search-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Layout Toggle */
+.layout-toggle {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    padding: 2px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 8px 0;
+    background: transparent;
+    color: var(--text-secondary);
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: var(--font-fam);
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.toggle-btn:hover {
+    color: white;
+}
+
+.toggle-btn.active {
+    background: var(--panel-bg);
+    color: var(--accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Buttons */
+.primary-btn,
+.secondary-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    font-family: var(--font-fam);
+    transition: all 0.2s;
+}
+
+.primary-btn {
+    background: var(--accent);
+    color: white;
+}
+
+.primary-btn:hover {
+    background: var(--accent-hover);
+    box-shadow: 0 0 15px rgba(94, 129, 255, 0.5);
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Right Details Panel */
+.right-panel {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    width: 320px;
+    max-height: calc(100vh - 48px);
+    display: flex;
+    flex-direction: column;
+    transform: translateX(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.right-panel.hidden {
+    transform: translateX(400px);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+.close-btn:hover {
+    opacity: 1;
+}
+
+.content-scroll {
+    overflow-y: auto;
+    flex: 1;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-right: 10px;
+}
+
+.content-scroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.content-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
+
+#nodeContent h2 {
+    margin: 0 0 10px 0;
+}
+
+#nodeContent img {
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+#nodeContent p {
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+    color: #ddd;
+}
+
+/* Modals */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.2s;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+    color: var(--text-secondary);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.helper-text {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 15px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Legend Panel */
+#graph-legend {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    padding: 16px 20px;
+    min-width: 160px;
+}
+
+#graph-legend h3 {
+    margin: 0 0 10px 0;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 4px 0;
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+.legend-item svg {
+    flex-shrink: 0;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* ==========================================
+   Mobile Optimization
+   ========================================== */
+@media (max-width: 768px) {
+
+    /* Top Bar for UI Panel */
+    #ui-panel {
+        top: 0;
+        left: 0;
+        width: 100vw;
+        border-radius: 0 0 16px 16px;
+        padding: 15px;
+        box-sizing: border-box;
+        gap: 10px;
+        max-height: 40vh;
+        /* Don't cover entire graph */
+        z-index: 20;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .subtitle {
+        font-size: 0.8rem;
+        margin: -5px 0 5px 0;
+    }
+
+    .layout-toggle {
+        margin-top: 5px;
+    }
+
+    /* Floating Action Button (FAB) for Add Relative */
+    #addNodeBtn {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 25;
+        box-shadow: 0 4px 12px rgba(94, 129, 255, 0.5);
+    }
+
+    #addNodeBtn .desktop-text {
+        display: none;
+    }
+
+    #addNodeBtn .mobile-icon {
+        display: block !important;
+        font-size: 24px;
+        font-weight: 300;
+        line-height: 1;
+    }
+
+    /* Details Panel as Bottom Sheet */
+    .right-panel {
+        top: auto;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-height: 55vh;
+        border-radius: 20px 20px 0 0;
+        box-sizing: border-box;
+        transform: translateY(0);
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .right-panel.hidden {
+        transform: translateY(110%);
+    }
+
+    .content-scroll {
+        /* Slightly reduce margins */
+        margin-top: 15px;
+    }
+
+    /* Compact Legend */
+    #graph-legend {
+        bottom: 24px;
+        left: 10px;
+        padding: 10px;
+        min-width: auto;
+        background: rgba(20, 25, 40, 0.85);
+        /* Slightly more opaque since it sits over graph */
+    }
+
+    #graph-legend h3 {
+        font-size: 0.75rem;
+        margin-bottom: 5px;
+    }
+
+    .legend-item {
+        font-size: 0.75rem;
+    }
+
+    .legend-item svg {
+        width: 30px;
+    }
+
+    /* Enhance Modals for small screens */
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+        padding: 15px;
+    }
+
+    .form-group {
+        margin-bottom: 10px;
+    }
+}
+
+/* Timeline Core Styles */
+#timeline-container {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px 20px;
+    z-index: 100;
+    border-radius: 30px;
+}
+
+#playTimelineBtn {
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    border-radius: 20px;
+    background: var(--accent);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+#playTimelineBtn:hover {
+    background: #4a6ce0;
+    transform: scale(1.05);
+}
+
+#timelineSlider {
+    width: 300px;
+    cursor: pointer;
+    accent-color: var(--accent);
+}
+
+.timeline-year {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent);
+    min-width: 50px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    #timeline-container {
+        bottom: 85px;
+        /* Above the edge or bottom buttons */
+        width: 90%;
+        padding: 10px;
+        gap: 10px;
+    }
+
+    #timelineSlider {
+        width: 100%;
+    }
+}
