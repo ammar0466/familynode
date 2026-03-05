@@ -1,7 +1,7 @@
 ---
 id: hjadin
-name: Hj Adin Hj Osman
-parents: ["hajiosman"]
+name: Hj Adin Hj Othman
+parents: ["hajiothman"]
 children: ["hasimahhjadin"]
 spouses: ["hjhaminah"]
 ---
