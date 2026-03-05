@@ -7,3 +7,6 @@ children: []
 spouses: []
 ---
 
+9th child of Abd Rahman Bin Basri and Hasimah@Sapiah Hj Adin
+
+Batu Pahat

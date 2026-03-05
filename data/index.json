@@ -149,12 +149,12 @@
             "name": "Uwais Bin Abdul Alim"
         },
         {
-            "id": "basrihjadin",
-            "name": "Basri Hj Adin"
+            "id": "basrihjosman",
+            "name": "Basri Hj Osman"
         },
         {
             "id": "hjadin",
-            "name": "Hj Adin"
+            "name": "Hj Adin Hj Osman"
         },
         {
             "id": "mokhtaramri",
@@ -171,6 +171,10 @@
         {
             "id": "asmahabdrahman",
             "name": "Asmah Binti Abd Rahman"
+        },
+        {
+            "id": "hajiosman",
+            "name": "Haji Osman"
         }
     ]
 }

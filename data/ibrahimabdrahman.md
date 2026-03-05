@@ -13,3 +13,5 @@ spouses: ["junaidahmokhtar:1984", "zamhanizakaria:1997"]
 Asal Johor , batu pahat
 
 kampung parit jabong
+
+1st son of Abd Rahman Bin Basri and Hasimah@Sapiah Hj Adin

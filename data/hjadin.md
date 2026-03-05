@@ -1,8 +1,8 @@
 ---
 id: hjadin
-name: Hj Adin
-parents: []
-children: ["basrihjadin"]
+name: Hj Adin Hj Osman
+parents: ["hajiosman"]
+children: []
 spouses: []
 ---
 
