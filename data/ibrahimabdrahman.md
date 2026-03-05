@@ -6,7 +6,7 @@ image: "./data/image/ibrahim.jpg"
 parents: ["abdrahmanbasri", "hasimahhjaddin"]
 children: ["nurazimahibrahim", "nurfaatihahibrahim", "muhammadzaidibrahim", "muhammadammaribrahim", "nurnadiahibrahim", "nurhamizahibrahim", "nursyafiqahibrahim", "nurhanisahsakinahibrahim", "muhammadyusufibrahim", "muhammadluqmanibrahim", "nurkhadijahmardhiahibrahim"]
 adopted: []
-spouses: ["junaidahmokhtar:1984", "zamhanizakaria:1999"]
+spouses: ["junaidahmokhtar:1984", "zamhanizakaria:1997"]
 
 ---
 
