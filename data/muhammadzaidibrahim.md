@@ -1,7 +1,7 @@
 ---
 id: muhammadzaidibrahim
 name: Muhammad Zaid Ibrahim
-born: 1987
+born: 30/11/1987
 parents: ["ibrahimabdrahman", "junaidahmokhtar"]
 children: []
 spouses: []

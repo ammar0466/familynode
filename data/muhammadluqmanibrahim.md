@@ -1,6 +1,7 @@
 ---
 id: muhammadluqmanibrahim
 name: Muhammad Luqman Ibrahim
+born: 20/10/2002
 parents: ["ibrahimabdrahman", "zamhanizakaria"]
 children: []
 spouses: []

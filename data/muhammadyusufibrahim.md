@@ -1,6 +1,7 @@
 ---
 id: muhammadyusufibrahim
 name: Muhammad Yusuf Ibrahim
+born: 16/6/2000
 parents: ["ibrahimabdrahman", "zamhanizakaria"]
 children: []
 spouses: []

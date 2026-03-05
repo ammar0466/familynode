@@ -1,6 +1,7 @@
 ---
-id: nurkhadijahmardhiyahibrahim
-name: Nur Khadijah Mardhiyah Ibrahim
+id: nurkhadijahmardhiahibrahim
+name: Nur Khadijah Mardhiah Ibrahim
+born: 12/6/2005
 parents: ["ibrahimabdrahman", "zamhanizakaria"]
 children: []
 spouses: []

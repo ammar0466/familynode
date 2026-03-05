@@ -1,7 +1,7 @@
 ---
 id: nurnadiahibrahim
 name: Nur Nadiah Ibrahim
-born: 1991
+born: 25/1/1991
 parents: ["ibrahimabdrahman", "junaidahmokhtar"]
 children: []
 spouses: []

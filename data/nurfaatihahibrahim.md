@@ -1,7 +1,7 @@
 ---
 id: nurfaatihahibrahim
 name: Nur Faatihah Ibrahim
-born: 1986
+born: 7/10/1986
 parents: ["ibrahimabdrahman", "junaidahmokhtar"]
 children: []
 spouses: []

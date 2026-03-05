@@ -1,7 +1,7 @@
 ---
 id: nurhamizahibrahim
 name: Nur Hamizah Ibrahim
-born: 1995
+born: 2/7/1994
 parents: ["ibrahimabdrahman", "junaidahmokhtar"]
 children: []
 spouses: []

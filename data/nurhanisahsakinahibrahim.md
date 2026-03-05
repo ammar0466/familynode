@@ -1,6 +1,7 @@
 ---
 id: nurhanisahsakinahibrahim
 name: Nur Hanisah Sakinah Ibrahim
+born: 26/6/1998
 parents: ["ibrahimabdrahman", "zamhanizakaria"]
 children: []
 spouses: []

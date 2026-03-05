@@ -1,7 +1,7 @@
 ---
 id: nursyafiqahibrahim
 name: Nur Syafiqah Ibrahim
-born: 1997
+born: 29/5/1996
 parents: ["ibrahimabdrahman", "junaidahmokhtar"]
 children: []
 spouses: []
