@@ -4,7 +4,7 @@ name: Junaidah Mokhtar
 born: 18/2/1961
 died: 1997
 image: "https://images.unsplash.com/photo-1544833066-1cddf1decc20?q=80&w=200&auto=format&fit=crop"
-parents: []
+parents: ["mokhtaramri"]
 children: ["nurazimahibrahim", "nurfaatihahibrahim", "muhammadzaidibrahim", "muhammadammaribrahim", "nurnadiahibrahim", "nurhamizahibrahim", "nursyafiqahibrahim"]
 spouses: ["ibrahimabdrahman:1984"]
 ---
