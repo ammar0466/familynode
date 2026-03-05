@@ -125,8 +125,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 16px;
-    overflow: hidden;
-    transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.3s ease;
+    /* On desktop, this just holds elements vertically. Overflow hidden is for mobile menu expansion. */
 }
 
 h1 {
@@ -379,9 +378,10 @@ textarea:focus {
     font-style: italic;
 }
 
-/* Legend Panel */
+/* Legend Panel (Desktop overrides) */
 #graph-legend {
-    position: absolute;
+    /* Break out of ui-panel flow on desktop to pin to bottom */
+    position: fixed;
     bottom: 24px;
     left: 24px;
     padding: 16px 20px;
@@ -467,10 +467,13 @@ textarea:focus {
         max-height: 0;
         opacity: 0;
         margin-top: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.3s ease;
     }
 
     .ui-controls.expanded {
-        max-height: 200px;
+        max-height: 480px;
+        /* Increased to fit legend completely */
         opacity: 1;
         margin-top: 15px;
     }
