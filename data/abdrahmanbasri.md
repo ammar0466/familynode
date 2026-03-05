@@ -1,7 +1,7 @@
 ---
 id: abdrahmanbasri
 name: Abd Rahman Bin Basri
-parents: []
+parents: ["basrihjaddin"]
 children: ["ibrahimabdrahman"]
 spouses: ["hasimahhjaddin"]
 ---
