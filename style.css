@@ -77,7 +77,7 @@ html {
 }
 
 /* UI Panel (Left) */
-#ui-panel {
+#left-ui-wrapper {
     position: absolute;
     top: 24px;
     left: 24px;
@@ -85,6 +85,48 @@ html {
     display: flex;
     flex-direction: column;
     gap: 16px;
+    z-index: 10;
+}
+
+#ui-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ui-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-controls {
+    display: none;
+    gap: 12px;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    cursor: pointer;
+    padding: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.icon-btn:hover {
+    color: white;
+}
+
+.ui-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, margin-top 0.3s ease, opacity 0.3s ease;
 }
 
 h1 {
@@ -154,10 +196,10 @@ textarea:focus {
 /* Layout Toggle */
 .layout-toggle {
     display: flex;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 8px;
-    padding: 2px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    padding: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .toggle-btn {
@@ -166,12 +208,12 @@ textarea:focus {
     background: transparent;
     color: var(--text-secondary);
     border: none;
-    border-radius: 6px;
+    border-radius: 16px;
     cursor: pointer;
     font-family: var(--font-fam);
     font-size: 0.85rem;
     font-weight: 600;
-    transition: all 0.2s;
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
 }
 
 .toggle-btn:hover {
@@ -179,9 +221,9 @@ textarea:focus {
 }
 
 .toggle-btn.active {
-    background: var(--panel-bg);
-    color: var(--accent);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 2px 10px rgba(94, 129, 255, 0.4);
 }
 
 /* Buttons */
@@ -346,13 +388,37 @@ textarea:focus {
     min-width: 160px;
 }
 
-#graph-legend h3 {
-    margin: 0 0 10px 0;
+.legend-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.legend-header h3 {
+    margin: 0;
     font-size: 0.85rem;
     font-weight: 600;
     color: var(--text-secondary);
     text-transform: uppercase;
     letter-spacing: 1px;
+}
+
+#legendContent {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+}
+
+#legendContent.minimized {
+    opacity: 0;
+}
+
+#toggleLegendBtn {
+    transition: transform 0.3s ease;
+}
+
+#toggleLegendBtn.rotated {
+    transform: rotate(180deg);
 }
 
 .legend-item {
@@ -378,17 +444,43 @@ textarea:focus {
 @media (max-width: 768px) {
 
     /* Top Bar for UI Panel */
-    #ui-panel {
+    #left-ui-wrapper {
         top: 0;
         left: 0;
         width: 100vw;
+        gap: 0;
+    }
+
+    #ui-panel {
         border-radius: 0 0 16px 16px;
         padding: 15px;
         box-sizing: border-box;
-        gap: 10px;
-        max-height: 40vh;
-        /* Don't cover entire graph */
+        gap: 0;
         z-index: 20;
+    }
+
+    .mobile-controls {
+        display: flex;
+    }
+
+    .ui-controls {
+        max-height: 0;
+        opacity: 0;
+        margin-top: 0;
+    }
+
+    .ui-controls.expanded {
+        max-height: 200px;
+        opacity: 1;
+        margin-top: 15px;
+    }
+
+    .ui-controls.search-only .layout-toggle {
+        display: none;
+    }
+
+    .ui-controls.menu-only .search-container {
+        display: none;
     }
 
     h1 {
@@ -398,10 +490,6 @@ textarea:focus {
     .subtitle {
         font-size: 0.8rem;
         margin: -5px 0 5px 0;
-    }
-
-    .layout-toggle {
-        margin-top: 5px;
     }
 
     /* Floating Action Button (FAB) for Add Relative */

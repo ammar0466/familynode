@@ -498,6 +498,48 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// Mobile UI Toggles
+document.getElementById('mobileSearchBtn')?.addEventListener('click', () => {
+    const controls = document.getElementById('ui-controls');
+    if (controls.classList.contains('expanded') && controls.classList.contains('search-only')) {
+        controls.classList.remove('expanded', 'search-only');
+    } else {
+        controls.classList.remove('menu-only');
+        controls.classList.add('expanded', 'search-only');
+        document.getElementById('searchInput').focus();
+    }
+});
+
+document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+    const controls = document.getElementById('ui-controls');
+    if (controls.classList.contains('expanded') && controls.classList.contains('menu-only')) {
+        controls.classList.remove('expanded', 'menu-only');
+    } else {
+        controls.classList.remove('search-only');
+        controls.classList.add('expanded', 'menu-only');
+    }
+});
+
+// Legend Toggle
+document.getElementById('toggleLegendBtn')?.addEventListener('click', function () {
+    const content = document.getElementById('legendContent');
+    content.classList.toggle('minimized');
+    this.classList.toggle('rotated');
+    if (!content.classList.contains('minimized') && content.scrollHeight > 0) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+    } else {
+        content.style.maxHeight = '0px';
+    }
+});
+
+// Initialize legend height for animation
+window.addEventListener('load', () => {
+    const content = document.getElementById('legendContent');
+    if (content && !content.classList.contains('minimized')) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+    }
+});
+
 // Layout Toggles
 btnGraph.addEventListener('click', () => {
     if (!isTreeView) return;
