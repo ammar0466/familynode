@@ -10,6 +10,6 @@ spouses: ["junaidahmokhtar:1984", "zamhanizakaria:1997"]
 
 ---
 
-King of the Britons and the central figure in the legends of Camelot.
+Asal Johor , batu pahat
 
-He led the defense of Britain against Saxon invaders in the late 5th and early 6th centuries.
+kampung parit jabong
