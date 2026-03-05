@@ -1,9 +1,9 @@
 ---
 id: abdrahmanbasri
 name: Abd Rahman Bin Basri
-parents: ["basrihjaddin"]
+parents: ["basrihjadin"]
 children: ["ibrahimabdrahman"]
-spouses: ["hasimahhjaddin"]
+spouses: ["hasimahhjadin"]
 ---
 
 Father of Ibrahim Abd Rahman.

@@ -1,6 +1,6 @@
 ---
-id: hasimahhjaddin
-name: Hasimah@Sapiah Hj Addin
+id: hasimahhjadin
+name: Hasimah@Sapiah Hj Adin
 born: 15/5/1941
 died: 2/4/2022
 parents: []
