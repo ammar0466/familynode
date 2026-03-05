@@ -603,11 +603,15 @@ textarea:focus {
 
 @media (max-width: 768px) {
     #timeline-container {
-        bottom: 85px;
-        /* Above the edge or bottom buttons */
-        width: 90%;
-        padding: 10px;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transform: none;
+        width: 100%;
+        padding: 10px 16px;
         gap: 10px;
+        border-radius: 16px 16px 0 0;
+        box-sizing: border-box;
     }
 
     #timelineSlider {
