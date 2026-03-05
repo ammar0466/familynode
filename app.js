@@ -510,13 +510,23 @@ document.getElementById('mobileSearchBtn')?.addEventListener('click', () => {
     }
 });
 
-document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
-    const controls = document.getElementById('ui-controls');
-    if (controls.classList.contains('expanded') && controls.classList.contains('menu-only')) {
-        controls.classList.remove('expanded', 'menu-only');
+// Mobile Menu Toggle
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const uiControls = document.getElementById('ui-controls');
+const leftUiWrapper = document.getElementById('left-ui-wrapper'); // Added to toggle entire menu context
+
+mobileMenuBtn.addEventListener('click', () => {
+    const isCurrentlyExpanded = uiControls.classList.contains('expanded') && uiControls.classList.contains('menu-only');
+
+    if (isCurrentlyExpanded) {
+        // Close it
+        uiControls.classList.remove('expanded', 'menu-only');
+        leftUiWrapper.classList.remove('menu-active'); // Hides the absolute-positioned Legend
     } else {
-        controls.classList.remove('search-only');
-        controls.classList.add('expanded', 'menu-only');
+        // Open Menu fully
+        uiControls.classList.remove('search-only');
+        uiControls.classList.add('expanded', 'menu-only');
+        leftUiWrapper.classList.add('menu-active'); // Reveals the absolute-positioned Legend
     }
 });
 

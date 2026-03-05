@@ -386,6 +386,12 @@ textarea:focus {
     left: 24px;
     padding: 16px 20px;
     min-width: 160px;
+    background: var(--panel-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--panel-border);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+    z-index: 10;
 }
 
 .legend-header {
@@ -472,8 +478,8 @@ textarea:focus {
     }
 
     .ui-controls.expanded {
-        max-height: 480px;
-        /* Increased to fit legend completely */
+        max-height: 200px;
+        /* Reduced to standard without legend */
         opacity: 1;
         margin-top: 15px;
     }
@@ -537,15 +543,30 @@ textarea:focus {
 
     /* Refactored Legend in Menu */
     #graph-legend {
-        position: relative;
-        bottom: auto;
-        left: auto;
-        padding: 12px;
+        position: absolute;
+        /* Re-flow over the UI bounds */
+        top: 100%;
+        /* Anchor to bottom of mobile wrapper */
+        left: 0;
+        width: 100vw;
+        padding: 12px 24px;
         min-width: auto;
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(20, 25, 40, 0.95);
         border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
-        box-shadow: none;
+        border-radius: 0 0 16px 16px;
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
+        z-index: 15;
+        /* Just below main UI */
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(-20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    #left-ui-wrapper.menu-active #graph-legend {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
     }
 
     .legend-header h3 {
