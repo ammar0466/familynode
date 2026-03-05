@@ -456,12 +456,11 @@ textarea:focus {
 
     /* Compact Legend */
     #graph-legend {
-        bottom: 24px;
+        bottom: 160px;
         left: 10px;
         padding: 10px;
         min-width: auto;
         background: rgba(20, 25, 40, 0.85);
-        /* Slightly more opaque since it sits over graph */
     }
 
     #graph-legend h3 {
