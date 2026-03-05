@@ -492,31 +492,20 @@ textarea:focus {
         margin: -5px 0 5px 0;
     }
 
-    /* Floating Action Button (FAB) for Add Relative */
-    #addNodeBtn {
-        position: fixed;
-        bottom: 24px;
-        right: 24px;
-        width: 56px;
-        height: 56px;
-        border-radius: 50%;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 25;
-        box-shadow: 0 4px 12px rgba(94, 129, 255, 0.5);
+    /* Menu Add Node Button */
+    .menu-add-btn {
+        width: 100%;
+        padding: 12px;
+        border-radius: 8px;
+        display: block;
     }
 
-    #addNodeBtn .desktop-text {
-        display: none;
+    .menu-add-btn .desktop-text {
+        display: inline;
     }
 
     #addNodeBtn .mobile-icon {
-        display: block !important;
-        font-size: 24px;
-        font-weight: 300;
-        line-height: 1;
+        display: none !important;
     }
 
     /* Details Panel as Bottom Sheet */
@@ -543,26 +532,22 @@ textarea:focus {
         margin-top: 15px;
     }
 
-    /* Compact Legend */
+    /* Refactored Legend in Menu */
     #graph-legend {
-        bottom: 160px;
-        left: 10px;
-        padding: 10px;
+        position: relative;
+        bottom: auto;
+        left: auto;
+        padding: 12px;
         min-width: auto;
-        background: rgba(20, 25, 40, 0.85);
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 8px;
+        box-shadow: none;
     }
 
-    #graph-legend h3 {
-        font-size: 0.75rem;
-        margin-bottom: 5px;
-    }
-
-    .legend-item {
-        font-size: 0.75rem;
-    }
-
-    .legend-item svg {
-        width: 30px;
+    .legend-header h3 {
+        font-size: 0.8rem;
+        margin: 0;
     }
 
     /* Enhance Modals for small screens */

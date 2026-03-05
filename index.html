@@ -62,14 +62,58 @@
                     <input type="text" id="searchInput" placeholder="Search relatives..." autocomplete="off">
                     <div id="searchResults" class="hidden"></div>
                 </div>
+
+                <button id="addNodeBtn" class="primary-btn menu-add-btn">
+                    <span class="desktop-text">+ Add Relative</span>
+                </button>
+
+                <!-- Legend -->
+                <div id="graph-legend" class="glass-panel menu-legend">
+                    <div class="legend-header">
+                        <h3>Legend</h3>
+                        <button id="toggleLegendBtn" class="icon-btn" title="Toggle Legend">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </button>
+                    </div>
+                    <div id="legendContent">
+                        <div class="legend-item">
+                            <svg width="40" height="12">
+                                <line x1="0" y1="6" x2="40" y2="6" stroke="#5e81ff" stroke-width="2" />
+                                <polygon points="35,2 40,6 35,10" fill="#5e81ff" />
+                            </svg>
+                            <span>Parent → Child</span>
+                        </div>
+                        <div class="legend-item">
+                            <svg width="40" height="12">
+                                <line x1="0" y1="6" x2="40" y2="6" stroke="#ff6b9e" stroke-width="2" />
+                            </svg>
+                            <span>Married</span>
+                        </div>
+                        <div class="legend-item">
+                            <svg width="40" height="12">
+                                <line x1="0" y1="6" x2="40" y2="6" stroke="#a0a0a0" stroke-width="2"
+                                    stroke-dasharray="5,3" />
+                            </svg>
+                            <span>Divorced</span>
+                        </div>
+                        <div class="legend-item">
+                            <svg width="40" height="12">
+                                <line x1="0" y1="6" x2="35" y2="6" stroke="#ff9f43" stroke-width="2"
+                                    stroke-dasharray="5,3" />
+                                <polygon points="35,2 40,6 35,10" fill="#ff9f43" />
+                            </svg>
+                            <span>Adopted</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <button id="addNodeBtn" class="primary-btn fab-btn">
-            <span class="desktop-text">+ Add Relative</span>
-            <span class="mobile-icon" style="display:none">+</span>
-        </button>
     </div>
+
+
 
     <!-- Right Panel: Node Details -->
     <div id="details-pane" class="glass-panel right-panel hidden">
@@ -82,45 +126,7 @@
         </div>
     </div>
 
-    <!-- Legend -->
-    <div id="graph-legend" class="glass-panel">
-        <div class="legend-header">
-            <h3>Legend</h3>
-            <button id="toggleLegendBtn" class="icon-btn" title="Toggle Legend">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="6 9 12 15 18 9"></polyline>
-                </svg>
-            </button>
-        </div>
-        <div id="legendContent">
-            <div class="legend-item">
-                <svg width="40" height="12">
-                    <line x1="0" y1="6" x2="40" y2="6" stroke="#5e81ff" stroke-width="2" />
-                    <polygon points="35,2 40,6 35,10" fill="#5e81ff" />
-                </svg>
-                <span>Parent → Child</span>
-            </div>
-            <div class="legend-item">
-                <svg width="40" height="12">
-                    <line x1="0" y1="6" x2="40" y2="6" stroke="#ff6b9e" stroke-width="2" />
-                </svg>
-                <span>Married</span>
-            </div>
-            <div class="legend-item">
-                <svg width="40" height="12">
-                    <line x1="0" y1="6" x2="40" y2="6" stroke="#a0a0a0" stroke-width="2" stroke-dasharray="5,3" />
-                </svg>
-                <span>Divorced</span>
-            </div>
-            <div class="legend-item">
-                <svg width="40" height="12">
-                    <line x1="0" y1="6" x2="35" y2="6" stroke="#ff9f43" stroke-width="2" stroke-dasharray="5,3" />
-                    <polygon points="35,2 40,6 35,10" fill="#ff9f43" />
-                </svg>
-                <span>Adopted</span>
-            </div>
-        </div>
-    </div>
+
 
     <!-- Modal for Node Creation / Editing -->
     <div id="edit-modal" class="modal hidden">
