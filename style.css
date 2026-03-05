@@ -531,6 +531,7 @@ textarea:focus {
         box-sizing: border-box;
         transform: translateY(0);
         transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        z-index: 150;
     }
 
     .right-panel.hidden {
