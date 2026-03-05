@@ -5,7 +5,7 @@ born: 15/5/1941
 died: 2/4/2022
 image: "./data/image/hasimahsapiah.jpg"
 parents: []
-children: ["ibrahimabdrahman"]
+children: ["ibrahimabdrahman", "asmahabdrahman"]
 spouses: ["abdrahmanbasri"]
 ---
 
