@@ -1,6 +1,8 @@
 ---
 id: hasimahhjaddin
 name: Hasimah@Sapiah Hj Addin
+born: 15/5/1941
+died: 2/4/2022
 parents: []
 children: ["ibrahimabdrahman"]
 spouses: ["abdrahmanbasri"]
