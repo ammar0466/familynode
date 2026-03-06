@@ -1,6 +1,6 @@
 ---
 id: hajiothman
-name: Haji Othman
+name: Hj Othman Bin Hj Abd Rashid
 parents: []
 children: ["basrihjothman", "hjadin"]
 adopted: ["hjhaminah"]
