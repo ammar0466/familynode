@@ -26,6 +26,7 @@ const playTimelineBtn = document.getElementById('playTimelineBtn');
 
 let isTreeView = false; // toggle state
 let timelineYear = new Date().getFullYear();
+let treeViewSyntheticEdges = new Set();
 let isPlayingTimeline = false;
 let playInterval = null;
 
@@ -562,6 +563,8 @@ btnGraph.addEventListener('click', () => {
     btnGraph.classList.add('active');
     btnTree.classList.remove('active');
     network.setOptions(getNetworkOptions());
+    updateGraphByTimeline();
+    setTimeout(() => network.fit({ animation: true }), 200);
 });
 
 btnTree.addEventListener('click', async () => {
@@ -576,12 +579,71 @@ btnTree.addEventListener('click', async () => {
     await Promise.all(loadPromises);
 
     network.setOptions(getNetworkOptions());
+    updateGraphByTimeline();
+    setTimeout(() => network.fit({ animation: true }), 200);
 });
 
 // Timeline Logic
+function rebuildTreeViewEdges() {
+    if (!nodes || !edges) return;
+
+    const existingSyntheticIds = Array.from(treeViewSyntheticEdges);
+    if (existingSyntheticIds.length) {
+        edges.remove(existingSyntheticIds.filter(id => edges.get(id)));
+        treeViewSyntheticEdges.clear();
+    }
+
+    if (!isTreeView) return;
+
+    const syntheticEdges = [];
+    nodes.forEach(node => {
+        if (node._isFam || !node._fullData) return;
+
+        const data = node._fullData;
+
+        (data.parents || []).forEach(parentId => {
+            const edgeId = `tree-parent-${parentId}-${data.id}`;
+            if (!edges.get(edgeId)) {
+                syntheticEdges.push({
+                    id: edgeId,
+                    from: parentId,
+                    to: data.id,
+                    color: { color: '#5e81ff' },
+                    width: 2,
+                    arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+                    smooth: false,
+                    _treeSynthetic: true
+                });
+                treeViewSyntheticEdges.add(edgeId);
+            }
+        });
+
+        (data.adoptedBy || []).forEach(parentId => {
+            const edgeId = `tree-adopted-${parentId}-${data.id}`;
+            if (!edges.get(edgeId)) {
+                syntheticEdges.push({
+                    id: edgeId,
+                    from: parentId,
+                    to: data.id,
+                    color: { color: '#ff9f43' },
+                    width: 2,
+                    dashes: [5, 3],
+                    arrows: { to: { enabled: true, scaleFactor: 0.5 } },
+                    smooth: false,
+                    _treeSynthetic: true
+                });
+                treeViewSyntheticEdges.add(edgeId);
+            }
+        });
+    });
+
+    if (syntheticEdges.length) edges.add(syntheticEdges);
+}
+
 function updateGraphByTimeline() {
     if (!nodes || !edges) return;
 
+    rebuildTreeViewEdges();
     timelineYearDisplay.innerText = timelineYear;
 
     const nodesToUpdate = [];
@@ -590,19 +652,23 @@ function updateGraphByTimeline() {
         let changes = {};
 
         if (node._isFam) {
-            if (node._marriageYear && timelineYear < node._marriageYear) {
+            if (isTreeView) {
                 isVisible = false;
-            }
-            if (node._divorceYear) {
-                if (timelineYear >= node._divorceYear) {
-                    changes.color = '#a0a0a0';
-                    changes.title = 'Divorced';
-                    isVisible = true;
-                } else {
-                    changes.color = '#ff6b9e';
-                    changes.title = 'Marriage';
-                    if (node._marriageYear && timelineYear < node._marriageYear) {
-                        isVisible = false;
+            } else {
+                if (node._marriageYear && timelineYear < node._marriageYear) {
+                    isVisible = false;
+                }
+                if (node._divorceYear) {
+                    if (timelineYear >= node._divorceYear) {
+                        changes.color = '#a0a0a0';
+                        changes.title = 'Divorced';
+                        isVisible = true;
+                    } else {
+                        changes.color = '#ff6b9e';
+                        changes.title = 'Marriage';
+                        if (node._marriageYear && timelineYear < node._marriageYear) {
+                            isVisible = false;
+                        }
                     }
                 }
             }
@@ -628,20 +694,26 @@ function updateGraphByTimeline() {
         let isVisible = true;
         let changes = {};
 
-        if (edge._marriageYear && timelineYear < edge._marriageYear) {
+        if (edge._treeSynthetic) {
+            isVisible = isTreeView;
+        } else if (isTreeView) {
             isVisible = false;
-        }
+        } else {
+            if (edge._marriageYear && timelineYear < edge._marriageYear) {
+                isVisible = false;
+            }
 
-        if (edge._divorceYear) {
-            if (timelineYear >= edge._divorceYear) {
-                changes.color = { color: '#a0a0a0' };
-                changes.dashes = true;
-                isVisible = true; // Divorce implies they were married
-            } else {
-                changes.color = { color: '#ff6b9e' };
-                changes.dashes = false;
-                if (edge._marriageYear && timelineYear < edge._marriageYear) {
-                    isVisible = false;
+            if (edge._divorceYear) {
+                if (timelineYear >= edge._divorceYear) {
+                    changes.color = { color: '#a0a0a0' };
+                    changes.dashes = true;
+                    isVisible = true;
+                } else {
+                    changes.color = { color: '#ff6b9e' };
+                    changes.dashes = false;
+                    if (edge._marriageYear && timelineYear < edge._marriageYear) {
+                        isVisible = false;
+                    }
                 }
             }
         }
