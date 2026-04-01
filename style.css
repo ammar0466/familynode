@@ -237,6 +237,14 @@ textarea:focus {
     transition: all 0.2s;
 }
 
+.menu-link {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+}
+
 .primary-btn {
     background: var(--accent);
     color: white;
