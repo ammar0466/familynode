@@ -108,18 +108,17 @@ function getNetworkOptions() {
     };
 
     if (isTreeView) {
-        const isMobile = window.innerWidth <= 768;
         options.layout = {
             hierarchical: {
                 enabled: true,
                 direction: 'UD',
                 sortMethod: 'directed',
                 shakeTowards: 'roots',
-                nodeSpacing: isMobile ? 170 : 220,
-                treeSpacing: isMobile ? 220 : 320,
-                levelSeparation: isMobile ? 200 : 260,
+                nodeSpacing: 320,
+                treeSpacing: 420,
+                levelSeparation: 320,
                 blockShifting: true,
-                edgeMinimization: true,
+                edgeMinimization: false,
                 parentCentralization: true
             }
         };
@@ -129,7 +128,7 @@ function getNetworkOptions() {
         options.edges.smooth = {
             enabled: false
         };
-        options.nodes.margin = isMobile ? 14 : 18;
+        options.nodes.margin = 24;
     } else {
         options.layout = {
             hierarchical: { enabled: false }
