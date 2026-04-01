@@ -107,23 +107,28 @@ function getNetworkOptions() {
     };
 
     if (isTreeView) {
+        const isMobile = window.innerWidth <= 768;
         options.layout = {
             hierarchical: {
                 enabled: true,
                 direction: 'UD',
                 sortMethod: 'directed',
-                nodeSpacing: 150,
-                levelSeparation: 150
+                shakeTowards: 'roots',
+                nodeSpacing: isMobile ? 170 : 220,
+                treeSpacing: isMobile ? 220 : 320,
+                levelSeparation: isMobile ? 200 : 260,
+                blockShifting: true,
+                edgeMinimization: true,
+                parentCentralization: true
             }
         };
         options.physics = {
             enabled: false // Physics creates chaos with hierarchical layout
         };
         options.edges.smooth = {
-            type: 'cubicBezier',
-            forceDirection: 'vertical',
-            roundness: 0.4
+            enabled: false
         };
+        options.nodes.margin = isMobile ? 14 : 18;
     } else {
         options.layout = {
             hierarchical: { enabled: false }
